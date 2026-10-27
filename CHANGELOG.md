@@ -4,7 +4,13 @@ Changes to the `map.yml` format and the Clash Mapmaker tools. The format version
 (`proto`) only changes when old maps would be read differently, and every change to it is
 listed here.
 
-## 0.1.0 (unreleased)
+## 0.2.0
+
+- `bunkers.shops.npcs` entries take an optional `profession` (the villager's job: `armorer`,
+  `cleric`, ... or `none`) and `biome` (`plains`, `desert`, ...) so a map picks how each
+  shopkeeper looks. Older maps read the same; `proto` stays 1.
+
+## 0.1.0
 
 First release of the `clash-map` library.
 

@@ -1,10 +1,12 @@
 package gg.hcfrevival.clash.map;
 
+import gg.hcfrevival.clash.map.MapManifest.Bunkers;
 import gg.hcfrevival.clash.map.MapManifest.ControlPoint;
 import gg.hcfrevival.clash.map.MapManifest.Item;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -107,6 +109,26 @@ class MapManifestReaderTest {
                 """);
         ControlPoint point = (ControlPoint) result.manifest().goals().getFirst();
         assertEquals(Duration.ofMinutes(90), point.captureTime());
+    }
+
+    @Test
+    void shopkeepersCarryTheirLook() {
+        MapManifest manifest = reader.read("""
+                proto: 1
+                bunkers:
+                  shops:
+                    npcs:
+                      - { team: red, shop: gear, profession: armorer, biome: desert, at: { x: 0.5, y: 64, z: 0.5 } }
+                      - { shop: sell, at: { x: 1.5, y: 64, z: 0.5 } }
+                """).manifest();
+        List<Bunkers.ShopNpc> npcs = manifest.bunkers().shops().npcs();
+        assertEquals("armorer", npcs.get(0).profession());
+        assertEquals("desert", npcs.get(0).biome());
+        assertNull(npcs.get(1).profession());
+        assertNull(npcs.get(1).biome());
+        String saved = new MapManifestWriter().write(manifest);
+        assertTrue(saved.contains("profession: armorer"), saved);
+        assertEquals(manifest.bunkers(), reader.read(saved).manifest().bunkers());
     }
 
     @Test

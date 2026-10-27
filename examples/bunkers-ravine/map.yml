@@ -85,14 +85,14 @@ bunkers:
   shops:
     catalog: default
     npcs:
-      - { team: red, shop: gear, at: { x: -210.5, y: 70, z: 10.5, yaw: 180 } }
-      - { team: red, shop: sell, at: { x: -212.5, y: 70, z: 10.5, yaw: 180 } }
-      - { team: blue, shop: gear, at: { x: 210.5, y: 70, z: -9.5 } }
-      - { team: blue, shop: sell, at: { x: 212.5, y: 70, z: -9.5 } }
-      - { team: green, shop: gear, at: { x: 10.5, y: 70, z: -210.5, yaw: 90 } }
-      - { team: green, shop: sell, at: { x: 10.5, y: 70, z: -212.5, yaw: 90 } }
-      - { team: yellow, shop: gear, at: { x: -9.5, y: 70, z: 210.5, yaw: -90 } }
-      - { team: yellow, shop: sell, at: { x: -9.5, y: 70, z: 212.5, yaw: -90 } }
+      - { team: red, shop: gear, profession: armorer, at: { x: -210.5, y: 70, z: 10.5, yaw: 180 } }
+      - { team: red, shop: sell, profession: cleric, biome: desert, at: { x: -212.5, y: 70, z: 10.5, yaw: 180 } }
+      - { team: blue, shop: gear, profession: armorer, at: { x: 210.5, y: 70, z: -9.5 } }
+      - { team: blue, shop: sell, profession: cleric, at: { x: 212.5, y: 70, z: -9.5 } }
+      - { team: green, shop: gear, profession: armorer, at: { x: 10.5, y: 70, z: -210.5, yaw: 90 } }
+      - { team: green, shop: sell, profession: cleric, at: { x: 10.5, y: 70, z: -212.5, yaw: 90 } }
+      - { team: yellow, shop: gear, profession: armorer, at: { x: -9.5, y: 70, z: 210.5, yaw: -90 } }
+      - { team: yellow, shop: sell, profession: cleric, at: { x: -9.5, y: 70, z: 212.5, yaw: -90 } }
   mines:
     - { region: red-mine, respawn: 90s }
     - { region: blue-mine, respawn: 90s }

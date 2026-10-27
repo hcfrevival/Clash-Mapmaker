@@ -503,6 +503,12 @@ public final class MapValidator {
                         team(path + ".team", npc.team());
                     }
                     require(path + ".shop", npc.shop());
+                    if (npc.profession() != null && !Bunkers.ShopNpc.PROFESSIONS.contains(npc.profession())) {
+                        error(path + ".profession", npc.profession() + " is not a villager profession such as armorer.");
+                    }
+                    if (npc.biome() != null && !Bunkers.ShopNpc.BIOMES.contains(npc.biome())) {
+                        error(path + ".biome", npc.biome() + " is not a villager biome such as plains.");
+                    }
                     if (npc.at() == null) {
                         error(path + ".at", "missing. Where does the shopkeeper stand?");
                     }

@@ -477,10 +477,16 @@ public record MapManifest(
         }
 
         /**
-         * @param team the team the shopkeeper belongs to, or {@code null} for a neutral one
-         * @param shop which shop it opens, for example {@code gear} or {@code sell}
+         * @param team       the team the shopkeeper belongs to, or {@code null} for a neutral one
+         * @param shop       which shop it opens, for example {@code gear} or {@code sell}
+         * @param profession the villager's job, one of {@link #PROFESSIONS}; {@code null} for a plain villager
+         * @param biome      the villager's skin, one of {@link #BIOMES}; {@code null} for the default
          */
-        public record ShopNpc(String team, String shop, Pose at) {
+        public record ShopNpc(String team, String shop, Pose at, String profession, String biome) {
+            public static final List<String> PROFESSIONS = List.of("none", "armorer", "butcher", "cartographer", "cleric",
+                    "farmer", "fisherman", "fletcher", "leatherworker", "librarian", "mason", "nitwit", "shepherd",
+                    "toolsmith", "weaponsmith");
+            public static final List<String> BIOMES = List.of("desert", "jungle", "plains", "savanna", "snow", "swamp", "taiga");
         }
 
         /** Ores broken inside {@code region} grow back after {@code respawn}. */

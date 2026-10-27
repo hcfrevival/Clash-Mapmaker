@@ -319,6 +319,8 @@ public final class MapManifestWriter {
                     Map<String, Object> entry = flow();
                     put(entry, "team", npc.team());
                     put(entry, "shop", npc.shop());
+                    put(entry, "profession", npc.profession());
+                    put(entry, "biome", npc.biome());
                     put(entry, "at", pose(npc.at()));
                     return entry;
                 }));

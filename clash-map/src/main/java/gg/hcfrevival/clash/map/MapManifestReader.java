@@ -389,7 +389,8 @@ public final class MapManifestReader {
             }).orElse(null);
             Bunkers.Shops shops = node.section("shops").map(section -> {
                 Bunkers.Shops parsed = new Bunkers.Shops(section.string("catalog"), section.sections("npcs",
-                        npc -> new Bunkers.ShopNpc(npc.string("team"), npc.string("shop"), pose(npc, "at"))));
+                        npc -> new Bunkers.ShopNpc(npc.string("team"), npc.string("shop"), pose(npc, "at"),
+                                npc.string("profession"), npc.string("biome"))));
                 section.finish();
                 return parsed;
             }).orElse(null);

@@ -102,6 +102,15 @@ class MapValidatorTest {
     }
 
     @Test
+    void shopkeeperLooksMustBeVillagerOnes() throws IOException {
+        String yaml = example("bunkers-ravine").replace("profession: armorer", "profession: blacksmith").replace("biome: desert", "biome: nether");
+        List<Problem> problems = problems(yaml);
+        assertTrue(hasError(problems, "bunkers.shops.npcs[0].profession"));
+        assertTrue(hasError(problems, "bunkers.shops.npcs[1].biome"));
+        assertFalse(MapValidator.hasErrors(problems(example("bunkers-ravine"))));
+    }
+
+    @Test
     void variantsAreCheckedToo() throws IOException {
         String yaml = example("bunkers-ravine").replace(
                 "region: koth-hill\n        capture-time: 3m", "region: koth-hil\n        capture-time: 3m");

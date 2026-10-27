@@ -75,7 +75,7 @@ Maven:
 <dependency>
     <groupId>gg.hcfrevival.clash</groupId>
     <artifactId>clash-map</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
@@ -87,7 +87,7 @@ repositories {
 }
 
 dependencies {
-    implementation("gg.hcfrevival.clash:clash-map:0.1.0")
+    implementation("gg.hcfrevival.clash:clash-map:0.2.0")
 }
 ```
 

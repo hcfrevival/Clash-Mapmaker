@@ -1,0 +1,123 @@
+# Example Bunkers map. Four teams, each with a base, fight over a KOTH in the middle.
+# Every field is explained in docs/MAP_FORMAT.md.
+proto: 1
+name: Ravine
+slug: bunkers-ravine
+version: 1.0.0
+objective: "Hold the <gold>KOTH</gold> for 5 minutes or be the last team standing."
+authors:
+  - { name: ExampleBuilder, contribution: Build }
+gamemode: bunkers
+max-players: 40
+
+world:
+  spawn: { x: 0.5, y: 90, z: 0.5 }
+  bounds: map-bounds
+  time: 6000
+  weather: clear
+  gamerules: { doDaylightCycle: false, doMobSpawning: false }
+
+teams:
+  - { id: red, name: Red, color: red, max: 10, overfill: 2, base: red-base }
+  - { id: blue, name: Blue, color: blue, max: 10, overfill: 2, base: blue-base }
+  - { id: green, name: Green, color: green, max: 10, overfill: 2, base: green-base }
+  - { id: yellow, name: Yellow, color: yellow, max: 10, overfill: 2, base: yellow-base }
+
+spawns:
+  - team: red
+    points:
+      - { x: -200.5, y: 70, z: 0.5, yaw: -90 }
+      - { x: -200.5, y: 70, z: 4.5, yaw: -90 }
+  - team: blue
+    points:
+      - { x: 200.5, y: 70, z: 0.5, yaw: 90 }
+  - team: green
+    points:
+      - { x: 0.5, y: 70, z: -200.5 }
+  - team: yellow
+    points:
+      - { x: 0.5, y: 70, z: 200.5, yaw: 180 }
+
+kits:
+  starter:
+    armor:
+      helmet: iron_helmet
+      chestplate: iron_chestplate
+      leggings: iron_leggings
+      boots: iron_boots
+    items:
+      - { slot: 0, material: iron_sword }
+      - { slot: 1, material: iron_pickaxe }
+      - { slot: 8, material: cooked_beef, amount: 16 }
+
+classes:
+  allowed: [archer, bard, rogue, guardian]
+  caps: { archer: 2, bard: 1, rogue: 2, guardian: 1 }
+
+regions:
+  - { id: map-bounds, cuboid: { a: { x: -300, y: 0, z: -300 }, b: { x: 300, y: 255, z: 300 } }, flags: [kill-outside] }
+  - { id: koth-hill, cuboid: { a: { x: -6, y: 68, z: -6 }, b: { x: 6, y: 74, z: 6 } }, flags: [deny-build] }
+  - { id: red-base, cuboid: { a: { x: -260, y: 0, z: -60 }, b: { x: -140, y: 255, z: 60 } } }
+  - { id: red-mine, cuboid: { a: { x: -230, y: 20, z: -40 }, b: { x: -200, y: 50, z: -10 } } }
+  - { id: blue-base, cuboid: { a: { x: 140, y: 0, z: -60 }, b: { x: 260, y: 255, z: 60 } } }
+  - { id: blue-mine, cuboid: { a: { x: 200, y: 20, z: 10 }, b: { x: 230, y: 50, z: 40 } } }
+  - { id: green-base, cuboid: { a: { x: -60, y: 0, z: -260 }, b: { x: 60, y: 255, z: -140 } } }
+  - { id: green-mine, cuboid: { a: { x: 10, y: 20, z: -230 }, b: { x: 40, y: 50, z: -200 } } }
+  - { id: yellow-base, cuboid: { a: { x: -60, y: 0, z: 140 }, b: { x: 60, y: 255, z: 260 } } }
+  - { id: yellow-mine, cuboid: { a: { x: -40, y: 20, z: 200 }, b: { x: -10, y: 50, z: 230 } } }
+
+goals:
+  - type: control-point
+    id: koth
+    name: KOTH
+    region: koth-hill
+    capture-time: 5m
+
+respawn:
+  delay: 5s
+  kit: starter
+
+bunkers:
+  grace: 10m
+  dtr: 5.0
+  build:
+    outside-bases: [cobweb, water, lava]
+  shops:
+    catalog: default
+    npcs:
+      - { team: red, shop: gear, at: { x: -210.5, y: 70, z: 10.5, yaw: 180 } }
+      - { team: red, shop: sell, at: { x: -212.5, y: 70, z: 10.5, yaw: 180 } }
+      - { team: blue, shop: gear, at: { x: 210.5, y: 70, z: -9.5 } }
+      - { team: blue, shop: sell, at: { x: 212.5, y: 70, z: -9.5 } }
+      - { team: green, shop: gear, at: { x: 10.5, y: 70, z: -210.5, yaw: 90 } }
+      - { team: green, shop: sell, at: { x: 10.5, y: 70, z: -212.5, yaw: 90 } }
+      - { team: yellow, shop: gear, at: { x: -9.5, y: 70, z: 210.5, yaw: -90 } }
+      - { team: yellow, shop: sell, at: { x: -9.5, y: 70, z: 212.5, yaw: -90 } }
+  mines:
+    - { region: red-mine, respawn: 90s }
+    - { region: blue-mine, respawn: 90s }
+    - { region: green-mine, respawn: 90s }
+    - { region: yellow-mine, respawn: 90s }
+  subclaims:
+    price: 250
+    chests:
+      - { x: -212, y: 70, z: -3 }
+      - { x: -212, y: 70, z: 3, price: 400 }
+      - { x: 212, y: 70, z: -3 }
+      - { x: 212, y: 70, z: 3, price: 400 }
+      - { x: -3, y: 70, z: -212 }
+      - { x: 3, y: 70, z: 212 }
+  economy: { starting-balance: 0, kill-reward: 50 }
+
+time-limit: { duration: 60m, result: most-dtr }
+
+variants:
+  quick:
+    name: "Ravine (quick)"
+    goals:
+      - type: control-point
+        id: koth
+        name: KOTH
+        region: koth-hill
+        capture-time: 3m
+    time-limit: { duration: 30m, result: most-dtr }

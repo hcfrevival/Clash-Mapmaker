@@ -1,0 +1,82 @@
+# Example Capture the Wool map. Steal both wools from the other side and place them
+# on your own monument.
+proto: 1
+name: Loom
+slug: ctw-loom
+version: 1.0.0
+objective: "Bring both enemy wools back to your monument."
+authors:
+  - { name: ExampleBuilder, contribution: Build }
+  - { name: ExampleHelper, contribution: Layout }
+gamemode: ctw
+max-players: 20
+
+world:
+  spawn: { x: 0.5, y: 90, z: 0.5 }
+  bounds: map-bounds
+
+teams:
+  - { id: red, name: Red, color: red, max: 10 }
+  - { id: blue, name: Blue, color: blue, max: 10 }
+
+spawns:
+  - team: red
+    points:
+      - { x: -100.5, y: 64, z: 0.5, yaw: -90 }
+  - team: blue
+    points:
+      - { x: 100.5, y: 64, z: 0.5, yaw: 90 }
+
+kits:
+  red-kit:
+    armor:
+      helmet: { material: leather_helmet, color: red }
+      chestplate: iron_chestplate
+      leggings: iron_leggings
+      boots: iron_boots
+    items:
+      - { slot: 0, material: stone_sword }
+      - { slot: 1, material: bow }
+      - { slot: 2, material: iron_pickaxe }
+      - { slot: 3, material: glass, amount: 32 }
+      - { slot: 9, material: arrow, amount: 24 }
+  blue-kit:
+    armor:
+      helmet: { material: leather_helmet, color: blue }
+      chestplate: iron_chestplate
+      leggings: iron_leggings
+      boots: iron_boots
+    items:
+      - { slot: 0, material: stone_sword }
+      - { slot: 1, material: bow }
+      - { slot: 2, material: iron_pickaxe }
+      - { slot: 3, material: glass, amount: 32 }
+      - { slot: 9, material: arrow, amount: 24 }
+
+kit-chests:
+  - region: mid-supplies
+    items:
+      - { material: golden_apple, amount: 2 }
+      - { material: splash_potion, potion: healing }
+
+regions:
+  - { id: map-bounds, cuboid: { a: { x: -150, y: 0, z: -80 }, b: { x: 150, y: 255, z: 80 } }, flags: [kill-outside] }
+  - { id: red-cyan-room, cuboid: { a: { x: 130, y: 60, z: -30 }, b: { x: 140, y: 66, z: -20 } } }
+  - { id: red-lime-room, cuboid: { a: { x: 130, y: 60, z: 20 }, b: { x: 140, y: 66, z: 30 } } }
+  - { id: blue-orange-room, cuboid: { a: { x: -140, y: 60, z: -30 }, b: { x: -130, y: 66, z: -20 } } }
+  - { id: blue-pink-room, cuboid: { a: { x: -140, y: 60, z: 20 }, b: { x: -130, y: 66, z: 30 } } }
+  - { id: mid-supplies, cuboid: { a: { x: -3, y: 63, z: -3 }, b: { x: 3, y: 66, z: 3 } } }
+
+goals:
+  - { type: wool, id: red-cyan, name: Cyan Wool, owner: red, color: cyan, monument: { x: -105, y: 66, z: -2 }, room: red-cyan-room }
+  - { type: wool, id: red-lime, name: Lime Wool, owner: red, color: lime, monument: { x: -105, y: 66, z: 2 }, room: red-lime-room }
+  - { type: wool, id: blue-orange, name: Orange Wool, owner: blue, color: orange, monument: { x: 105, y: 66, z: -2 }, room: blue-orange-room }
+  - { type: wool, id: blue-pink, name: Pink Wool, owner: blue, color: pink, monument: { x: 105, y: 66, z: 2 }, room: blue-pink-room }
+
+respawn:
+  delay: 5s
+  teams:
+    red: { kit: red-kit }
+    blue: { kit: blue-kit }
+
+time-limit: { duration: 45m, result: most-goals }

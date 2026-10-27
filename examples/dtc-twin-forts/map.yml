@@ -1,0 +1,74 @@
+# Example Destroy the Core map. Leak the other team's core by getting its lava out.
+proto: 1
+name: Twin Forts
+slug: dtc-twin-forts
+version: 1.0.0
+objective: "Break into the enemy core and make the lava leak."
+authors:
+  - { name: ExampleBuilder, contribution: Build }
+gamemode: dtc
+max-players: 24
+
+world:
+  spawn: { x: 0.5, y: 100, z: 0.5 }
+  bounds: map-bounds
+  time: 6000
+
+teams:
+  - { id: red, name: Red, color: red, max: 12, overfill: 2 }
+  - { id: blue, name: Blue, color: "#3a7bff", max: 12, overfill: 2 }
+
+spawns:
+  - team: red
+    points:
+      - { x: -120.5, y: 65, z: 0.5, yaw: -90 }
+  - team: blue
+    points:
+      - { x: 120.5, y: 65, z: 0.5, yaw: 90 }
+
+kits:
+  fighter:
+    armor:
+      helmet: iron_helmet
+      chestplate: { material: iron_chestplate, enchantments: { protection: 1 } }
+      leggings: iron_leggings
+      boots: iron_boots
+    items:
+      - { slot: 0, material: iron_sword, enchantments: { sharpness: 1 } }
+      - { slot: 1, material: bow }
+      - { slot: 2, material: diamond_pickaxe, enchantments: { efficiency: 2 } }
+      - { slot: 3, material: oak_planks, amount: 64 }
+      - { slot: 8, material: golden_apple, amount: 4 }
+      - { slot: 9, material: arrow, amount: 32 }
+
+regions:
+  - { id: map-bounds, cuboid: { a: { x: -180, y: 0, z: -80 }, b: { x: 180, y: 255, z: 80 } }, flags: [kill-outside] }
+  - { id: red-core-casing, cuboid: { a: { x: -152, y: 60, z: -2 }, b: { x: -148, y: 64, z: 2 } } }
+  - { id: blue-core-casing, cuboid: { a: { x: 148, y: 60, z: -2 }, b: { x: 152, y: 64, z: 2 } } }
+
+goals:
+  - type: core
+    id: red-core
+    name: Red Core
+    owner: red
+    material: obsidian
+    region: red-core-casing
+    leak: 5
+    mode-changes:
+      - { after: 20m, material: gold_block }
+  - type: core
+    id: blue-core
+    name: Blue Core
+    owner: blue
+    material: obsidian
+    region: blue-core-casing
+    leak: 5
+    mode-changes:
+      - { after: 20m, material: gold_block }
+
+respawn:
+  delay: 3s
+  kit: fighter
+
+time-limit: { duration: 45m, result: most-goals, overtime: 5m }
+victory: [{ goals: all-enemy }, time-limit]

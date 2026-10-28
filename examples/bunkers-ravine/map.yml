@@ -111,6 +111,8 @@ bunkers:
 
 time-limit: { duration: 60m, result: most-dtr }
 
+cooldowns: { enderpearl: 16s, crapple: 45s, gapple: 5m, totem: 30s, wind-charge: 15s }
+
 variants:
   quick:
     name: "Ravine (quick)"

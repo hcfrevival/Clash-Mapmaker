@@ -26,7 +26,7 @@ Contents: [The basics](#the-basics) ·
 [world](#world) · [teams](#teams) · [spawns](#spawns) · [kits](#kits) ·
 [kit-chests](#kit-chests) · [classes](#classes) · [regions](#regions) · [goals](#goals) ·
 [respawn](#respawn) · [bunkers](#bunkers) · [time-limit](#time-limit) ·
-[victory](#victory) · [variants](#variants)
+[cooldowns](#cooldowns) · [victory](#victory) · [variants](#variants)
 
 ## The basics
 
@@ -403,6 +403,22 @@ time-limit: { duration: 45m, result: most-goals, overtime: 5m }
 | `result` | | Who wins when time runs out: `most-dtr` (Bunkers), `most-goals`, `most-kills`, `tie`, or a team id (for example `defenders` in Base Defense). |
 | `overtime` | | Extra time when the result would be a tie. |
 
+## cooldowns
+
+How long each item stays unusable after use. Leave a key out for the server's default; `0s` turns that item's cooldown off on this map.
+
+```yaml
+cooldowns: { enderpearl: 16s, crapple: 45s, gapple: 5m, totem: 30s, wind-charge: 15s }
+```
+
+| Field | What it is |
+| --- | --- |
+| `enderpearl` | After throwing an ender pearl. |
+| `crapple` | After eating a golden apple. |
+| `gapple` | After eating an enchanted golden apple. |
+| `totem` | After a totem of undying pops. |
+| `wind-charge` | After throwing a wind charge. |
+
 ## victory
 
 How the match is won. Each mode already has a sensible list, so most maps leave this out.
@@ -446,7 +462,7 @@ variants:
 ```
 
 A variant can replace `objective`, `max-players`, `join`, `world`, `teams`, `spawns`,
-`kits`, `kit-chests`, `classes`, `regions`, `goals`, `respawn`, `bunkers`, `time-limit`
-and `victory`. A replaced section is replaced completely, so write it out in full. For
+`kits`, `kit-chests`, `classes`, `regions`, `goals`, `respawn`, `bunkers`, `time-limit`,
+`cooldowns` and `victory`. A replaced section is replaced completely, so write it out in full. For
 example, a variant with fewer teams also needs its own `spawns`, and for Bunkers its own
 `bunkers.shops`. Each variant is checked like a map of its own.

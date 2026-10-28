@@ -132,6 +132,24 @@ class MapManifestReaderTest {
     }
 
     @Test
+    void cooldownsRoundTripAndVariantsReplaceThem() {
+        MapManifest manifest = reader.read("""
+                proto: 1
+                cooldowns: { enderpearl: 16s, gapple: 5m, totem: 0s }
+                variants:
+                  fast:
+                    cooldowns: { enderpearl: 5s }
+                """).manifest();
+        assertEquals(new MapManifest.Cooldowns(Duration.ofSeconds(16), null, Duration.ofMinutes(5), Duration.ZERO, null), manifest.cooldowns());
+        String saved = new MapManifestWriter().write(manifest);
+        assertTrue(saved.contains("cooldowns: {enderpearl: 16s, gapple: 5m, totem: 0s}"), saved);
+        assertEquals(manifest.cooldowns(), reader.read(saved).manifest().cooldowns());
+        assertEquals(new MapManifest.Cooldowns(Duration.ofSeconds(5), null, null, null, null),
+                reader.readVariant(manifest, "fast").manifest().cooldowns());
+        assertNull(reader.read("proto: 1\n").manifest().cooldowns());
+    }
+
+    @Test
     void variantsReplaceWholeSections() {
         MapManifestReader.Result base = reader.read("""
                 proto: 1

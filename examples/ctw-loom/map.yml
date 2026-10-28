@@ -61,10 +61,10 @@ kit-chests:
 
 regions:
   - { id: map-bounds, cuboid: { a: { x: -150, y: 0, z: -80 }, b: { x: 150, y: 255, z: 80 } }, flags: [kill-outside] }
-  - { id: red-cyan-room, cuboid: { a: { x: 130, y: 60, z: -30 }, b: { x: 140, y: 66, z: -20 } } }
-  - { id: red-lime-room, cuboid: { a: { x: 130, y: 60, z: 20 }, b: { x: 140, y: 66, z: 30 } } }
-  - { id: blue-orange-room, cuboid: { a: { x: -140, y: 60, z: -30 }, b: { x: -130, y: 66, z: -20 } } }
-  - { id: blue-pink-room, cuboid: { a: { x: -140, y: 60, z: 20 }, b: { x: -130, y: 66, z: 30 } } }
+  - { id: red-cyan-room, keep-out: [red], cuboid: { a: { x: 130, y: 60, z: -30 }, b: { x: 140, y: 66, z: -20 } } }
+  - { id: red-lime-room, keep-out: [red], cuboid: { a: { x: 130, y: 60, z: 20 }, b: { x: 140, y: 66, z: 30 } } }
+  - { id: blue-orange-room, keep-out: [blue], cuboid: { a: { x: -140, y: 60, z: -30 }, b: { x: -130, y: 66, z: -20 } } }
+  - { id: blue-pink-room, keep-out: [blue], cuboid: { a: { x: -140, y: 60, z: 20 }, b: { x: -130, y: 66, z: 30 } } }
   - { id: mid-supplies, cuboid: { a: { x: -3, y: 63, z: -3 }, b: { x: 3, y: 66, z: 3 } } }
 
 goals:

@@ -332,7 +332,7 @@ public final class MapManifestReader {
                 section.finish();
                 return a == null || b == null ? null : new Cuboid(a, b);
             }).orElse(null);
-            return new Region(node.string("id"), cuboid, new LinkedHashSet<>(node.strings("flags")));
+            return new Region(node.string("id"), cuboid, new LinkedHashSet<>(node.strings("flags")), new LinkedHashSet<>(node.strings("keep-out")));
         }
 
         private Goal goal(Node node) {

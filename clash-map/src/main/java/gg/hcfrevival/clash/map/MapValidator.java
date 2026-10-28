@@ -252,6 +252,9 @@ public final class MapValidator {
                                 + String.join(", ", Region.KNOWN_FLAGS.stream().sorted().toList()) + ".");
                     }
                 }
+                for (String team : region.keepOut()) {
+                    team(path + ".keep-out", team);
+                }
             }
         }
 

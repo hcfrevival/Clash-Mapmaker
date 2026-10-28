@@ -247,6 +247,9 @@ public final class MapManifestWriter {
         if (!region.flags().isEmpty()) {
             out.put("flags", flowList(region.flags().stream().sorted().toList()));
         }
+        if (!region.keepOut().isEmpty()) {
+            out.put("keep-out", flowList(region.keepOut().stream().sorted().toList()));
+        }
         return out;
     }
 

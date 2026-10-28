@@ -3,6 +3,7 @@ package gg.hcfrevival.clash.map;
 import gg.hcfrevival.clash.map.MapManifest.Bunkers;
 import gg.hcfrevival.clash.map.MapManifest.ControlPoint;
 import gg.hcfrevival.clash.map.MapManifest.ControlPointVictory;
+import gg.hcfrevival.clash.map.MapManifest.Cooldowns;
 import gg.hcfrevival.clash.map.MapManifest.Core;
 import gg.hcfrevival.clash.map.MapManifest.Destroyable;
 import gg.hcfrevival.clash.map.MapManifest.Goal;
@@ -113,6 +114,7 @@ public final class MapValidator {
             gamemode();
             bunkers();
             timeLimit();
+            cooldowns();
             victory();
             return problems;
         }
@@ -575,6 +577,18 @@ public final class MapValidator {
             }
         }
 
+        private void cooldowns() {
+            Cooldowns cooldowns = map.cooldowns();
+            if (cooldowns == null) {
+                return;
+            }
+            nonNegative("cooldowns.enderpearl", cooldowns.enderpearl());
+            nonNegative("cooldowns.crapple", cooldowns.crapple());
+            nonNegative("cooldowns.gapple", cooldowns.gapple());
+            nonNegative("cooldowns.totem", cooldowns.totem());
+            nonNegative("cooldowns.wind-charge", cooldowns.windCharge());
+        }
+
         private void victory() {
             boolean explicit = map.victory() != null;
             List<VictoryCondition> conditions = map.effectiveVictory();
@@ -665,6 +679,12 @@ public final class MapValidator {
         private void positive(String path, Duration duration) {
             if (duration != null && (duration.isNegative() || duration.isZero())) {
                 error(path, "should be longer than 0s.");
+            }
+        }
+
+        private void nonNegative(String path, Duration duration) {
+            if (duration != null && duration.isNegative()) {
+                error(path, "cannot be negative.");
             }
         }
 

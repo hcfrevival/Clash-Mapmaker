@@ -6,6 +6,7 @@ import gg.hcfrevival.clash.map.MapManifest.Bunkers;
 import gg.hcfrevival.clash.map.MapManifest.Classes;
 import gg.hcfrevival.clash.map.MapManifest.ControlPoint;
 import gg.hcfrevival.clash.map.MapManifest.ControlPointVictory;
+import gg.hcfrevival.clash.map.MapManifest.Cooldowns;
 import gg.hcfrevival.clash.map.MapManifest.Core;
 import gg.hcfrevival.clash.map.MapManifest.Cuboid;
 import gg.hcfrevival.clash.map.MapManifest.Destroyable;
@@ -62,7 +63,7 @@ public final class MapManifestReader {
     /** Keys a variant may replace. */
     public static final Set<String> VARIANT_KEYS = Set.of(
             "objective", "max-players", "join", "world", "teams", "spawns", "kits", "kit-chests",
-            "classes", "regions", "goals", "respawn", "bunkers", "time-limit", "victory");
+            "classes", "regions", "goals", "respawn", "bunkers", "time-limit", "cooldowns", "victory");
 
     private static final int MAX_FILE_CHARS = 4 * 1024 * 1024;
 
@@ -172,6 +173,7 @@ public final class MapManifestReader {
                     root.section("respawn").map(this::respawn).orElse(null),
                     root.section("bunkers").map(this::bunkers).orElse(null),
                     root.section("time-limit").map(this::timeLimit).orElse(null),
+                    root.section("cooldowns").map(this::cooldowns).orElse(null),
                     root.has("victory") ? victory(root) : null,
                     variants(root)
             );
@@ -427,6 +429,13 @@ public final class MapManifestReader {
             TimeLimit limit = new TimeLimit(node.duration("duration"), node.string("result"), node.duration("overtime"));
             node.finish();
             return limit;
+        }
+
+        private Cooldowns cooldowns(Node node) {
+            Cooldowns cooldowns = new Cooldowns(node.duration("enderpearl"), node.duration("crapple"),
+                    node.duration("gapple"), node.duration("totem"), node.duration("wind-charge"));
+            node.finish();
+            return cooldowns;
         }
 
         private List<VictoryCondition> victory(Node root) {

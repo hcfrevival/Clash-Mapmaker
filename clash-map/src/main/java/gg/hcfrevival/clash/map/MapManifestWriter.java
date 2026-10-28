@@ -53,7 +53,7 @@ public final class MapManifestWriter {
     /** Top-level sections that get a blank line above them. */
     private static final java.util.Set<String> SPACED = java.util.Set.of(
             "world", "teams", "spawns", "kits", "kit-chests", "classes", "regions", "goals",
-            "respawn", "bunkers", "time-limit", "victory", "variants");
+            "respawn", "bunkers", "time-limit", "cooldowns", "victory", "variants");
 
     public String write(MapManifest manifest) {
         StringBuilder out = new StringBuilder(HEADER);
@@ -147,6 +147,15 @@ public final class MapManifestWriter {
             put(limit, "result", manifest.timeLimit().result());
             put(limit, "overtime", duration(manifest.timeLimit().overtime()));
             root.put("time-limit", limit);
+        }
+        if (manifest.cooldowns() != null) {
+            Map<String, Object> cooldowns = flow();
+            put(cooldowns, "enderpearl", duration(manifest.cooldowns().enderpearl()));
+            put(cooldowns, "crapple", duration(manifest.cooldowns().crapple()));
+            put(cooldowns, "gapple", duration(manifest.cooldowns().gapple()));
+            put(cooldowns, "totem", duration(manifest.cooldowns().totem()));
+            put(cooldowns, "wind-charge", duration(manifest.cooldowns().windCharge()));
+            root.put("cooldowns", cooldowns);
         }
         if (manifest.victory() != null) {
             root.put("victory", flowList(manifest.victory().stream().map(this::victory).toList()));

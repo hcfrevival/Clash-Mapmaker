@@ -111,6 +111,12 @@ class MapValidatorTest {
     }
 
     @Test
+    void cooldownsMustBeDurationsAndZeroTurnsOneOff() throws IOException {
+        assertTrue(hasError(problems(example("bunkers-ravine").replace("crapple: 45s", "crapple: -5s")), "cooldowns.crapple"));
+        assertFalse(MapValidator.hasErrors(problems(example("bunkers-ravine").replace("crapple: 45s", "crapple: 0s"))));
+    }
+
+    @Test
     void variantsAreCheckedToo() throws IOException {
         String yaml = example("bunkers-ravine").replace(
                 "region: koth-hill\n        capture-time: 3m", "region: koth-hil\n        capture-time: 3m");

@@ -31,6 +31,7 @@ public record MapManifest(
         Respawn respawn,
         Bunkers bunkers,
         TimeLimit timeLimit,
+        Cooldowns cooldowns,
         List<VictoryCondition> victory,
         Map<String, Variant> variants
 ) {
@@ -519,6 +520,13 @@ public record MapManifest(
      */
     public record TimeLimit(Duration duration, String result, Duration overtime) {
         public static final List<String> RESULTS = List.of("tie", "most-dtr", "most-kills", "most-goals");
+    }
+
+    /**
+     * How long each item stays unusable after use. Leave a value out for the server's default;
+     * {@code 0s} turns that item's cooldown off on this map.
+     */
+    public record Cooldowns(Duration enderpearl, Duration crapple, Duration gapple, Duration totem, Duration windCharge) {
     }
 
     /** One way to win. The first condition a team meets ends the match. */

@@ -4,6 +4,13 @@ Changes to the `map.yml` format and the Clash Mapmaker tools. The format version
 (`proto`) only changes when old maps would be read differently, and every change to it is
 listed here.
 
+## 0.3.0
+
+- New optional top-level `cooldowns` section (`enderpearl`, `crapple`, `gapple`, `totem`,
+  `wind-charge`): how long each item stays unusable after use on this map. Leave a key out
+  for the server's default; `0s` turns that cooldown off. Variants can replace it. Older
+  maps read the same; `proto` stays 1.
+
 ## 0.2.0
 
 - `bunkers.shops.npcs` entries take an optional `profession` (the villager's job: `armorer`,

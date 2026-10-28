@@ -30,18 +30,17 @@ A finished map folder looks like this:
 ```
 my-map/
   map.yml
-  level.dat
   region/
-  ...
 ```
 
-### Coming soon: the Mapmaker plugin
+### Or build it in game: the ClashMapmaker plugin
 
-The ClashMapmaker plugin will let you do all of this in game instead of typing
-coordinates: select regions with a wand, place spawns where you stand, see everything
-outlined with particles, check the map with `/cmap validate` and export it as a zip.
-It will be published on the [releases page](https://github.com/hcfrevival/Clash-Mapmaker/releases).
-How to submit a finished map will be explained there too.
+Drop `clash-mapmaker-<version>.jar` from the
+[releases page](https://github.com/hcfrevival/Clash-Mapmaker/releases) into a plain Paper
+26.2 server and do all of this with commands instead of coordinates: select regions with a
+wand, place spawns where you stand, see everything outlined with particles, check the map
+with `/cmap validate` and export it as a zip ready to hand in.
+[docs/MAPMAKER.md](docs/MAPMAKER.md) walks through a map step by step.
 
 ## Tips
 
@@ -126,8 +125,8 @@ The tests load every map in `examples/`, so a broken example fails the build.
 
 ### Releases
 
-Pushing a tag such as `v0.1.0` builds the project, creates a GitHub release and
-publishes the library to the Maven repository above. See [CHANGELOG.md](CHANGELOG.md).
+Pushing a tag such as `v1.0.0` builds the project, creates a GitHub release with the plugin
+jar and publishes the library to the Maven repository above. See [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 

@@ -354,6 +354,7 @@ bunkers:
     npcs:
       - { team: red, shop: gear, profession: armorer, at: { x: -210.5, y: 70, z: 10.5, yaw: 180 } }
       - { team: red, shop: sell, profession: cleric, biome: desert, at: { x: -212.5, y: 70, z: 10.5, yaw: 180 } }
+      - { team: red, shop: enchanter, profession: librarian, at: { x: -214.5, y: 70, z: 10.5, yaw: 180 } }
   mines:
     - { region: red-mine, respawn: 90s }
   subclaims:
@@ -384,7 +385,7 @@ How a Bunkers match plays:
 | `dtr` | The DTR every team starts with. Usually `5.0`. |
 | `build.outside-bases` | The only blocks players can place outside their own base. Usually cobweb, water and lava. |
 | `shops.catalog` | Which set of shop items the server uses. Use `default`. |
-| `shops.npcs` | The shopkeepers. Each has a `shop` (`gear` to buy, `sell` to sell ores), a position `at`, and the `team` it belongs to. Leave out `team` for a shopkeeper anyone can use. Optional `profession` (the villager's job: `armorer`, `weaponsmith`, `librarian`, `cleric`, ... or `none`) and `biome` (its skin: `plains`, `desert`, `jungle`, `savanna`, `snow`, `swamp`, `taiga`) pick how the shopkeeper looks. |
+| `shops.npcs` | The shopkeepers. Each has a `shop` (`gear` to buy, `sell` to sell ores, `enchanter` to enchant the item in hand), a position `at`, and the `team` it belongs to. Leave out `team` for a shopkeeper anyone can use. Optional `profession` (the villager's job: `armorer`, `weaponsmith`, `librarian`, `cleric`, ... or `none`) and `biome` (its skin: `plains`, `desert`, `jungle`, `savanna`, `snow`, `swamp`, `taiga`) pick how the shopkeeper looks. |
 | `mines` | Regions where broken ores grow back after `respawn` (usually `90s`). |
 | `subclaims.price` | What a subclaim chest costs. Usually `250`. |
 | `subclaims.chests` | The block positions of the chests players can buy, each with an optional `price` of its own. Place them inside team bases. |

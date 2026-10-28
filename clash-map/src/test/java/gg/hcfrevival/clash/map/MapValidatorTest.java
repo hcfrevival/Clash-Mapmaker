@@ -94,6 +94,12 @@ class MapValidatorTest {
     }
 
     @Test
+    void keepOutMustNameTeams() throws IOException {
+        String yaml = example("ctw-loom").replace("keep-out: [red]", "keep-out: [purple]");
+        assertTrue(hasError(problems(yaml), "regions[1].keep-out"));
+    }
+
+    @Test
     void subclaimOutsideABaseIsAWarning() throws IOException {
         String yaml = example("bunkers-ravine").replace("- { x: -212, y: 70, z: -3 }", "- { x: 0, y: 70, z: 0 }");
         List<Problem> problems = problems(yaml);

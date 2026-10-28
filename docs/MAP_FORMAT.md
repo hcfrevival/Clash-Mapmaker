@@ -190,6 +190,7 @@ can give them in any order.
 regions:
   - { id: koth-hill, cuboid: { a: { x: -6, y: 68, z: -6 }, b: { x: 6, y: 74, z: 6 } }, flags: [deny-build] }
   - { id: map-bounds, cuboid: { a: { x: -300, y: 0, z: -300 }, b: { x: 300, y: 255, z: 300 } }, flags: [kill-outside] }
+  - { id: red-cyan-room, cuboid: { a: { x: 130, y: 60, z: -30 }, b: { x: 140, y: 66, z: -20 } }, keep-out: [red] }
 ```
 
 | Field | | What it is |
@@ -197,6 +198,7 @@ regions:
 | `id` | required | The region's id. |
 | `cuboid` | required | The two corners, `a` and `b`, as block positions. |
 | `flags` | | Extra rules for this region. |
+| `keep-out` | | Team ids that may not enter or build here; everyone else may. A wool room lists its owner so only the enemy can get in, as PGM maps do. Observers roam freely. |
 
 Flags:
 
@@ -283,7 +285,7 @@ goals:
 | `owner` | required | The team that has to place this wool. |
 | `color` | required | A dye color: `white`, `orange`, `magenta`, `light_blue`, `yellow`, `lime`, `pink`, `gray`, `light_gray`, `cyan`, `purple`, `blue`, `brown`, `green`, `red`, `black`. |
 | `monument` | required | The block position where the wool is placed. |
-| `room` | | The region with the chests that hold this wool. They refill. |
+| `room` | | The region with the chests that hold this wool. They refill. Give the room `keep-out: [<owner>]` so the owner cannot walk in. |
 | `craftable` | | `true` lets players craft this wool. Default `false`. |
 
 ### destroyable

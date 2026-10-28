@@ -281,7 +281,8 @@ public record MapManifest(
 
     // ---- regions ----------------------------------------------------------
 
-    public record Region(String id, Cuboid cuboid, Set<String> flags) {
+    /** @param keepOut team ids that may not enter or build here; everyone else may (PGM's {@code enter} filter) */
+    public record Region(String id, Cuboid cuboid, Set<String> flags, Set<String> keepOut) {
         /** Nobody can place or break blocks here. */
         public static final String DENY_BUILD = "deny-build";
         /** Players outside this region die. Usually set on the map bounds. */
@@ -290,10 +291,15 @@ public record MapManifest(
 
         public Region {
             flags = flags == null ? Set.of() : Set.copyOf(flags);
+            keepOut = keepOut == null ? Set.of() : Set.copyOf(keepOut);
         }
 
         public boolean has(String flag) {
             return flags.contains(flag);
+        }
+
+        public boolean keepsOut(String team) {
+            return keepOut.contains(team);
         }
     }
 

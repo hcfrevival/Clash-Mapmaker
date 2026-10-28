@@ -4,6 +4,12 @@ Changes to the `map.yml` format and the Clash Mapmaker tools. The format version
 (`proto`) only changes when old maps would be read differently, and every change to it is
 listed here.
 
+## 0.4.0
+
+- Regions take an optional `keep-out` list of team ids that may not enter or build there,
+  so a Capture the Wool map closes each wool room to its own team as PGM maps do. Older
+  maps read the same; `proto` stays 1.
+
 ## 0.3.0
 
 - New optional top-level `cooldowns` section (`enderpearl`, `crapple`, `gapple`, `totem`,

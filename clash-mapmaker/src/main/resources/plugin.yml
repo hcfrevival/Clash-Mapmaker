@@ -1,0 +1,10 @@
+name: ClashMapmaker
+version: ${project.version}
+main: gg.hcfrevival.clash.mapmaker.MapmakerPlugin
+api-version: '26.2'
+description: Build Clash maps in game and export them.
+website: https://github.com/hcfrevival/Clash-Mapmaker
+permissions:
+  clash.mapmaker:
+    description: Use /cmap
+    default: op

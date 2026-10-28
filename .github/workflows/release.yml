@@ -4,7 +4,7 @@ name: Release
 #   - builds and tests it
 #   - publishes clash-map to https://hcfrevival.github.io/Clash-Mapmaker/maven/
 #     (the gh-pages branch, under maven/)
-#   - creates a GitHub release with the jars
+#   - creates a GitHub release with the library jars and the ClashMapmaker plugin jar
 
 on:
   push:
@@ -80,5 +80,6 @@ jobs:
           gh release create "$GITHUB_REF_NAME" \
             "clash-map/target/clash-map-${version}.jar" \
             "clash-map/target/clash-map-${version}-sources.jar" \
+            "clash-mapmaker/target/clash-mapmaker-${version}.jar" \
             --title "Clash Mapmaker ${version}" \
             --generate-notes

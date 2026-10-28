@@ -4,6 +4,15 @@ Changes to the `map.yml` format and the Clash Mapmaker tools. The format version
 (`proto`) only changes when old maps would be read differently, and every change to it is
 listed here.
 
+## 1.0.0
+
+- The ClashMapmaker plugin (`clash-mapmaker-<version>.jar` on the release) builds a map in game
+  on a plain Paper 26.2 server: a wand with particle outlines, `/cmap` commands for teams,
+  spawns, regions, goals, kits, classes and the Bunkers fixtures, `/cmap validate` with the
+  world-dependent checks Clash runs, `/cmap save` and `/cmap export` to a zip ready to hand in.
+  See [docs/MAPMAKER.md](docs/MAPMAKER.md).
+- The `clash-map` library is unchanged apart from its version; `proto` stays 1.
+
 ## 0.4.0
 
 - Regions take an optional `keep-out` list of team ids that may not enter or build there,
